@@ -9,7 +9,7 @@ Example Role Splits:
  - Cisco
    - roles
      - ios
-        - catalyst_initial_switch_builds
+        - catalyst_basic_switch_builds
         - catalyst_switch_trunks
         - catalyst_switch_lacp
         - catalyst_spine_leaf_builds
