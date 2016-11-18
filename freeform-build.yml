@@ -1,0 +1,6 @@
+---
+- name: Generate Freeform Configuration Files
+  hosts: localhost
+
+  roles:
+    - any_os
