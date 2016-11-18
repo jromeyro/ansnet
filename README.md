@@ -36,6 +36,6 @@ Example Role Splits:
     
 For enhanced user experience a web browser interface is part of the system.
 
-The root of all the roles listed was the "Freeform" role, du to it ability to push to any device as long as it is supprted by Netmiko or NAPALM.
+The root of all the roles listed was the "Freeform" role, due to its ability to push to any device as long as it is supported by Netmiko or NAPALM.
 
 AnsNet was built in FreeBSD 11
