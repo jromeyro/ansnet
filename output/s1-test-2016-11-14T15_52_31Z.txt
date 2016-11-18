@@ -1,0 +1,15 @@
+#Created by AnsNet for s1-test on 2016-11-14T15:52:31Z
+# Configuration Type: Cisco IOS (Telnet)
+!
+hostname s1-test
+!
+interface g0/10
+!
+switchport
+!
+switchport access vlan 100
+!
+switchport mode access
+!
+!
+end

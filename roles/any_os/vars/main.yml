@@ -1,0 +1,10 @@
+any_os:
+ - {
+hostname: s1-test,
+vendor: cisco_ios_telnet,
+}
+config_lines:
+- interface g0/10
+- switchport
+- switchport access vlan 100
+- switchport mode access
