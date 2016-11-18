@@ -4,7 +4,8 @@ The intention of AnsNet is to create a user friendly orchestration system, for n
 It is based on Ansible, NAPALM and Netmiko libraries in order to provide multivendor configuration push.
 The Ansible roles are divided according Vendors and Function
 Example Role Splits:
-Roles
+
+- Roles
   - Cisco
     - ios
       - catalyst_initial_switch_builds
