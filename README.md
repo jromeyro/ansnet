@@ -34,4 +34,6 @@ Example Role Splits:
      - anyos
         - freeform_builds
     
-For enhanced user experience a web browser interface is part of the system
+For enhanced user experience a web browser interface is part of the system.
+
+The root of all the roles listed was the "Freeform" role, du to it ability to push to any device as long as it is supprted by Netmiko or NAPALM.
