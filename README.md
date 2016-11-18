@@ -20,17 +20,17 @@ Example Role Splits:
         - nexus_vpc_peers
         - nexus_downstream_vpcs
   - Juniper
-     -roles
+    -roles
       - junos
         - junos_switch_ports
         - junos_bgp_peerings
   - Arista
-   -roles
+    -roles
       - eos
         - eos_switch_ports
         - eos_bgp_peerings
   - Freeform
-     -roles
+    -roles
       - anyos
         - freeform_builds
       
