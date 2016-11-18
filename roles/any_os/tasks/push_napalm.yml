@@ -1,5 +1,5 @@
 ---
 - name: Push Configuration to Network Device
   command: /usr/local/bin/cl_napalm_configure --user ansible --password ansible --vendor {{item.vendor}} --strategy merge --dry-run {{item.hostname}} output/{{item.hostname}}-{{ansible_date_time.iso8601}}.txt
-  delegate_to: ros-nt-tools-1
+  delegate_to: localhost
   with_items: "{{ freeform }}"
