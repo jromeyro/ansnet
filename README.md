@@ -18,7 +18,7 @@ Roles
       - nexus_vpc_peers
       - nexus_downstream_vpcs
   - Juniper
-    - juons
+    - junos
       - junos_switch_ports
       - junos_bgp_peerings
   - Arista
