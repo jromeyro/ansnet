@@ -38,9 +38,9 @@ Example Role Splits:
  - ansnet
    - vendor_pages_per_role
      - html_forms-user_input
-	   - main.yml_builder_per_user_input
-	   - build_called_by_html
-	   - push_called_by_html
+       - main.yml_builder_per_user_input
+        - build_called_by_html
+        - push_called_by_html
     
 For enhanced user experience a web browser interface is part of the system.
 
