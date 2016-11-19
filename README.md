@@ -45,5 +45,5 @@ Playbook:
 ---
 - hosts: freebsd << Calls freebsd group in the hosts file. Normally located in /usr/local/ets/ansible/hosts
 
-The playbook can be ran on demand via command (ansible-playbook -vvv :/usr/local/share/ansible/freebsd) a shell script or scheduled CRON.
+The playbook can be ran on demand via command (ansible-playbook -vvv /usr/local/share/ansible/freebsd) a shell script or scheduled CRON.
 
