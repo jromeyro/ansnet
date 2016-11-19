@@ -1,0 +1,22 @@
+######################(FREEBSD SERVERS)###########
+[tools]
+ansible-tools-1
+ansible-tools-2
+ansible-devel
+#
+[mysql]
+mysql-1
+mysql-2
+#
+[haproxy]
+lb-1
+lb-2
+#
+[freebsd:children]
+tools
+mysql
+haproxy
+#
+[freebsd:vars]
+ansible_python_interpreter=/usr/local/bin/python2.7
+ansible_connection=paramiko

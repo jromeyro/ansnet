@@ -38,4 +38,12 @@ For enhanced user experience a web browser interface is part of the system.
 
 The root of all the roles listed was the "Freeform" role, due to its ability to push to any device as long as it is supported by Netmiko or NAPALM.
 
-AnsNet was built in FreeBSD 11
+AnsNet was built in FreeBSD 11.
+
+I've included a simple Update Playbook to show a the cross integration within Ansible. Also to show that the same system can be used not just for the purpose of Network Builds but also create tasks to administer the ansnet host system. The playbook is the only one in AnsNet that runs dependent in the host file (included in the repository).
+Playbook:
+---
+- hosts: freebsd << Calls freebsd group in the hosts file. Normally located in /usr/local/ets/ansible/hosts
+
+The playbook can be ran on demand via command (ansible-playbook -vvv :/usr/local/share/ansible/freebsd) a shell script or scheduled CRON.
+

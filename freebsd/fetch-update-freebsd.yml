@@ -1,0 +1,11 @@
+---
+- hosts: freebsd
+
+  tasks:
+  - name: update freebsd
+    command: env ASSUME_ALWAYS_YES=YES freebsd-update fetch install --not-running-from-cron
+    when: ansible_os_family == "FreeBSD"
+
+  - name: update pkg
+    action: command pkg install -y pkg
+    when: ansible_os_family == "FreeBSD"
