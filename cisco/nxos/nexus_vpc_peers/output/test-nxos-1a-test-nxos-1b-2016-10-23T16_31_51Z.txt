@@ -1,0 +1,144 @@
+#Created by AnsNet for test-nxos-1a and test-nxos-1b on 2016-10-23T16:31:51Z
+#
+# Configuration for Primary Nexus 
+# Hostname: test-nxos-1a
+#
+!
+feature vtp
+feature interface-vlan
+feature lacp
+feature vpc
+feature lldp
+!
+hostname test-nxos-1a
+!
+vtp mode transparent
+!
+vlan 145
+name "A DATA VLAN"
+vlan 146
+name "A VOICE VLAN"
+!
+! vPC Port Channel Members
+! For this Configuration the port channel members are: 
+! 1/0/1  1/0/2 
+!
+interface ethernet 1/0/1
+ description Peer_vPC_Links
+ switchport
+ switchport mode trunk
+ switchport trunk allowed vlan 1,2,3,4,5,6,7,8-100,200
+ switchport trunk native vlan 1
+ channel-group 1 mode active
+ no shutdown
+ exit
+!
+interface ethernet 1/0/2
+ description Peer_vPC_Links
+ switchport
+ switchport mode trunk
+ switchport trunk allowed vlan 1,2,3,4,5,6,7,8-100,200
+ switchport trunk native vlan 1
+ channel-group 1 mode active
+ no shutdown
+ exit
+!
+! vPC Peer keepalive VRF . For this Configuration the context is: test_vpc_context
+vrf context test_vpc_context
+!
+! Peer Keepalive Port. For this Configuration the port is 1/0/48 with IP: 10.0.0.1
+interface ethernet 1/0/48
+ description test-nxos-1a-test-nxos-1b:vPC_Peer_Keepalive
+ no switchport
+ vrf member test_vpc_context
+ ip address 10.0.0.1/30
+ no shutdown
+!
+! vPC switch domain. Fort his Configuration the ID is: 1
+! vPC Peer Keepalive destination IP: 10.0.0.2 with Local source IP: 10.0.0.1
+vpc domain 1
+  role priority 1000
+  system-priority 4000
+ peer-keepalive destination 10.0.0.2 source 10.0.0.1 vrf test_vpc_context
+ peer-config-check-bypass
+!
+! vPC Port Channel Interface. This is the vPC Peer Link Id is: 1
+interface port-channel 1
+ description vPC_PeerLink:test-nxos-1a:test-nxos-1b
+ vpc peer-link
+exit
+!
+end
+!
+#
+# Configuration for peer nexus 
+# Hostname: test-nxos-1b
+#
+!
+feature vtp
+feature interface-vlan
+feature lacp
+feature vpc
+feature lldp
+!
+hostname test-nxos-1b
+!
+vtp mode transparent
+!
+vlan 145
+name "A DATA VLAN"
+vlan 146
+name "A VOICE VLAN"
+!
+! vPC Port Channel Members
+! For this Configuration the port channel members are: 
+! 1/0/1  1/0/2 
+!
+interface ethernet 1/0/1
+ description Peer_vPC_Links
+ switchport
+ switchport mode trunk
+ switchport trunk allowed vlan 1,2,3,4,5,6,7,8-100,200
+ switchport trunk native vlan 1
+ channel-group 1 mode active
+ no shutdown
+ exit
+!
+interface ethernet 1/0/2
+ description Peer_vPC_Links
+ switchport
+ switchport mode trunk
+ switchport trunk allowed vlan 1,2,3,4,5,6,7,8-100,200
+ switchport trunk native vlan 1
+ channel-group 1 mode active
+ no shutdown
+ exit
+!
+! vPC Peer keepalive VRF . For this Configuration the context is: test_vpc_context
+vrf context test_vpc_context
+!
+! Peer Keepalive Port. For this Configuration the port is 1/0/48
+interface ethernet 1/0/48
+ description test-nxos-1b-test-nxos-1a:vPC_Peer_Keepalive
+ no switchport
+ vrf member test_vpc_context
+ ip address 10.0.0.2/30
+ no shutdown
+!
+! vPC switch domain. Fort his Configuration the ID is: 1
+! vPC Peer Keepalive destination IP: 10.0.0.1 with Local source IP: 10.0.0.2
+vpc domain 1
+  role priority 1000
+  system-priority 4000
+ peer-keepalive destination 10.0.0.1 source 10.0.0.2 vrf test_vpc_context
+ peer-config-check-bypass
+!
+! vPC Port Channel Interface. This is the vPC Peer Link Id is: 1
+interface port-channel 1
+ description vPC_PeerLink:test-nxos-1b:test-nxos-1a
+ vpc peer-link
+exit
+!
+end
+!
+

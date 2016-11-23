@@ -1,0 +1,52 @@
+nexus_vpc_peers:
+ - {
+#Primary Nexus
+hostname_vpc1: "test-nxos-1a",
+#
+#Secondary Nexus
+hostname_vpc2: "test-nxos-1b",
+#
+#Peer vPC Descriptiion
+vpc_interface_description: "Peer_vPC_Links",
+#
+#VLANS allowed in the Peer vPC Trunk (If All Just comment the variable with VLANs listed
+trunk_allowed_vlan: "1,2,3,4,5,6,7,8-100,200",
+# Then uncomment this line is all vlans are allowed
+#trunk_allowed_vlan: all,
+#
+#Native VLAN for the Trunk (VLAN 1 is default)
+trunk_native_vlan: 1,
+#
+# vPC Port Channel Id Number
+vpc_portchannel_number: 1,
+#
+#VRF Name for Keeplive Link
+vpc_vrf_context_name: "test_vpc_context",
+#
+#Keepalive Link ports
+#Primary Nexus
+peer_keepalive_port1: "1/0/48",
+#Secondary Nexus
+peer_keepalive_port2: "1/0/48",
+#
+# vPC Domain Id Number
+vpc_domain_id: 1,
+#
+#Keepalive Link IPs
+#Primary Nexus
+peer_keepalive_local_ip: 10.0.0.1,
+#Secondary Nexus
+peer_keepalive_remote_ip: 10.0.0.2,
+#
+}
+#VLANs to be added if neeeded
+switch_vlans:
+ - vlan 145
+ - name "A DATA VLAN"
+ - vlan 146
+ - name "A VOICE VLAN"
+#
+#Peer vPC Port Channel Interfaces
+vpc_port_channel_interfaces:
+ - 1/0/1
+ - 1/0/2
