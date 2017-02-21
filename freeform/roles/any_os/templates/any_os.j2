@@ -58,4 +58,13 @@ hostname {{item.hostname}}
 !
 {% endfor %}
 !
+{% else %}
+# Configuration Type: {{item.vendor}}
+# {{item.hostname}}
+#
+{%for configuration in config_lines %}
+{{configuration}}
+!
+{% endfor %}
+#
 {% endif %}
