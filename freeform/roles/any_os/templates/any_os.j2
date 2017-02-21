@@ -12,6 +12,7 @@
 {% else %}
 # Configuration Type: {{item.vendor}}
 {% endif %}
+{% if item.vendor == "cisco_ios_telnet" %}
 !
 hostname {{item.hostname}}
 !
@@ -21,4 +22,40 @@ hostname {{item.hostname}}
 {% endfor %}
 !
 end
+{% elif item.vendor == "ios" %}
+!
+hostname {{item.hostname}}
+!
+{%for configuration in config_lines %}
+{{configuration}}
+!
+{% endfor %}
+!
+end
+{% elif item.vendor == "junos" %}
+cli
+configure
+set host-name {{item.hostname}}
+{%for configuration in config_lines %}
+{{configuration}}
+{% endfor %}
+{% elif item.vendor == "eos" %}
+!
+hostname {{item.hostname}}
+!
+{%for configuration in config_lines %}
+{{configuration}}
+!
+{% endfor %}
+!
+end
+{% elif item.vendor == "a10" %}
 
+hostname {{item.hostname}}
+!
+{%for configuration in config_lines %}
+{{configuration}}
+!
+{% endfor %}
+!
+{% endif %}
