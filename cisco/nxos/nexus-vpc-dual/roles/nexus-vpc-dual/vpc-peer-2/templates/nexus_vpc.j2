@@ -1,0 +1,80 @@
+#Created by AnsNet for {{item.hostname_vpc2}} on {{ansible_date_time.iso8601}}
+#
+# Configuration for peer nexus 
+# Hostname: {{item.hostname_vpc2}}
+#
+!
+feature vtp
+feature interface-vlan
+feature lacp
+feature vpc
+feature lldp
+!
+hostname {{item.hostname_vpc2}}
+!
+vtp mode transparent
+!
+{% for vlans in switch_vlans %}
+{{vlans}}
+{% endfor %}
+!
+! vPC Port Channel Members
+! For this Configuration the port channel members are: 
+!{% for interface in vpc_port_channel_interfaces %} {{interface}} {% endfor %}
+
+!
+{% if item.trunk_allowed_vlan == "all" %}
+{% for interface in vpc_port_channel_interfaces %}
+interface ethernet {{interface}}
+ description {{item.vpc_interface_description}}
+ switchport
+ switchport mode trunk
+ switchport trunk allowed vlan all
+ switchport trunk native vlan {{item.trunk_native_vlan}}
+ channel-group {{item.vpc_portchannel_number}} mode active
+ no shutdown
+ exit
+!
+{% endfor %}
+{% else %}
+{% for interface in vpc_port_channel_interfaces %}
+interface ethernet {{interface}}
+ description {{item.vpc_interface_description}}
+ switchport
+ switchport mode trunk
+ switchport trunk allowed vlan {{item.trunk_allowed_vlan}}
+ switchport trunk native vlan {{item.trunk_native_vlan}}
+ channel-group {{item.vpc_portchannel_number}} mode active
+ no shutdown
+ exit
+!
+{% endfor %}
+{% endif %}
+! vPC Peer keepalive VRF . For this Configuration the context is: {{item.vpc_vrf_context_name}}
+vrf context {{item.vpc_vrf_context_name}}
+!
+! Peer Keepalive Port. For this Configuration the port is {{item.peer_keepalive_port2}}
+interface ethernet {{item.peer_keepalive_port2}}
+ description {{item.hostname_vpc2}}-{{item.hostname_vpc1}}:vPC_Peer_Keepalive
+ no switchport
+ vrf member {{item.vpc_vrf_context_name}}
+ ip address {{item.peer_keepalive_remote_ip}}/30
+ no shutdown
+!
+! vPC switch domain. Fort his Configuration the ID is: {{item.vpc_domain_id}}
+! vPC Peer Keepalive destination IP: {{item.peer_keepalive_local_ip}} with Local source IP: {{item.peer_keepalive_remote_ip}}
+vpc domain {{item.vpc_domain_id}}
+  role priority 1000
+  system-priority 4000
+ peer-keepalive destination {{item.peer_keepalive_local_ip}} source {{item.peer_keepalive_remote_ip}} vrf {{item.vpc_vrf_context_name}}
+ peer-config-check-bypass
+!
+! vPC Port Channel Interface. This is the vPC Peer Link Id is: {{item.vpc_portchannel_number}}
+interface port-channel {{item.vpc_portchannel_number}}
+ description vPC_PeerLink:{{item.hostname_vpc2}}:{{item.hostname_vpc1}}
+ vpc peer-link
+exit
+!
+end
+!
+

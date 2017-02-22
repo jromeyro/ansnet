@@ -1,0 +1,6 @@
+---
+- name: Generate configuration files
+  template:
+     src=nexus_vpc.j2
+     dest=/usr/local/share/ansible/cisco/output/switches/nexus-vpc/{{item.hostname_vpc1}}-{{ansible_date_time.iso8601}}.txt
+  with_items: "{{nexus_vpc}}"

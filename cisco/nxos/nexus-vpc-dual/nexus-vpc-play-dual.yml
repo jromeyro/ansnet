@@ -1,0 +1,10 @@
+---
+- name: Generate switch configuration files
+  hosts: localhost
+
+  vars_files:
+    - roles/nexus-vpc-dual/meta/main.yml
+
+  roles:
+    - nexus-vpc-dual/vpc-peer-1
+    - nexus-vpc-dual/vpc-peer-2
