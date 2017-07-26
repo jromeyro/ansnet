@@ -10,7 +10,7 @@ hostname_vpc2: "test-nxos-1b",
 vpc_interface_description: "Peer_vPC_Links",
 #
 #VLANS allowed in the Peer vPC Trunk (If All Just comment the variable with VLANs listed
-trunk_allowed_vlan: "1,2,3,4,5,6,7,8-100,200",
+trunk_allowed_vlan: "1,2,3,4,100,200",
 # Then uncomment this line is all vlans are allowed
 #trunk_allowed_vlan: all,
 #

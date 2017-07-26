@@ -1,6 +1,6 @@
 #Created by AnsNet for test-nxos-1a and test-nxos-1b on 2016-10-23T16:31:51Z
 #
-# Configuration for Primary Nexus 
+# Configuration for Primary Nexus
 # Hostname: test-nxos-1a
 #
 !
@@ -14,20 +14,28 @@ hostname test-nxos-1a
 !
 vtp mode transparent
 !
-vlan 145
-name "A DATA VLAN"
-vlan 146
-name "A VOICE VLAN"
+vlan 1
+name "1 VLAN"
+vlan 2
+name "2 VLAN"
+vlan 3
+name "3 VLAN"
+vlan 4
+name "4 VLAN"
+vlan 100
+name "100 VLAN"
+vlan 200
+name "200 VLAN"
 !
 ! vPC Port Channel Members
-! For this Configuration the port channel members are: 
-! 1/0/1  1/0/2 
+! For this Configuration the port channel members are:
+! 1/0/1  1/0/2
 !
 interface ethernet 1/0/1
  description Peer_vPC_Links
  switchport
  switchport mode trunk
- switchport trunk allowed vlan 1,2,3,4,5,6,7,8-100,200
+ switchport trunk allowed vlan 1,2,3,4,100,200
  switchport trunk native vlan 1
  channel-group 1 mode active
  no shutdown
@@ -37,7 +45,7 @@ interface ethernet 1/0/2
  description Peer_vPC_Links
  switchport
  switchport mode trunk
- switchport trunk allowed vlan 1,2,3,4,5,6,7,8-100,200
+ switchport trunk allowed vlan 1,2,3,4,100,200
  switchport trunk native vlan 1
  channel-group 1 mode active
  no shutdown
@@ -71,7 +79,7 @@ exit
 end
 !
 #
-# Configuration for peer nexus 
+# Configuration for peer nexus
 # Hostname: test-nxos-1b
 #
 !
@@ -85,20 +93,29 @@ hostname test-nxos-1b
 !
 vtp mode transparent
 !
-vlan 145
-name "A DATA VLAN"
-vlan 146
-name "A VOICE VLAN"
+vlan 1
+name "1 VLAN"
+vlan 2
+name "2 VLAN"
+vlan 3
+name "3 VLAN"
+vlan 4
+name "4 VLAN"
+vlan 100
+name "100 VLAN"
+vlan 200
+name "200 VLAN"
+!
 !
 ! vPC Port Channel Members
-! For this Configuration the port channel members are: 
-! 1/0/1  1/0/2 
+! For this Configuration the port channel members are:
+! 1/0/1  1/0/2
 !
 interface ethernet 1/0/1
  description Peer_vPC_Links
  switchport
  switchport mode trunk
- switchport trunk allowed vlan 1,2,3,4,5,6,7,8-100,200
+ switchport trunk allowed vlan 1,2,3,4,100,200
  switchport trunk native vlan 1
  channel-group 1 mode active
  no shutdown
@@ -108,7 +125,7 @@ interface ethernet 1/0/2
  description Peer_vPC_Links
  switchport
  switchport mode trunk
- switchport trunk allowed vlan 1,2,3,4,5,6,7,8-100,200
+ switchport trunk allowed vlan 1,2,3,4,100,200
  switchport trunk native vlan 1
  channel-group 1 mode active
  no shutdown
@@ -141,4 +158,3 @@ exit
 !
 end
 !
-
