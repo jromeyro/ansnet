@@ -1,5 +1,5 @@
 ---
 - name: Push Configuration to Network Device
-  command: /usr/local/bin/cl_napalm_configure --user ansible --password ansible --vendor nxos --strategy merge --dry-run {{item.hostname_vpc1}} collector c0ll3ct0r! output/switches/nexus-vpc/{{item.hostname_vpc1}}-{{ansible_date_time.iso8601}}.txt
+  command: /usr/local/bin/cl_napalm_configure --user ansible --password ansible --vendor nxos --strategy merge --dry-run {{item.hostname_vpc1}} ansible!usr ansible!pwd output/switches/nexus-vpc/{{item.hostname_vpc1}}-{{ansible_date_time.iso8601}}.txt
   delegate_to: localhost
   with_items: "{{ nexus_vpc }}"
