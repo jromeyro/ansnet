@@ -1,0 +1,65 @@
+#Created by AnsNet for {{item.asa_hostname}} on {{ansible_date_time.iso8601}}
+#
+# Configuration for ASA Ojects and NAT (Version 8.X)
+# Hostname: {{item.asa_hostname}}
+#
+!
+{% if item.conf_type == "Add" and item.perimeter is defined and item.nat_host0 is defined %}
+static ({{item.perimeter}},outside) {{item.pub_ip0}} {{item.nat_host0}} netmask 255.255.255.255
+!
+{% endif %}
+{% if item.conf_type == "Add" and item.perimeter is defined and item.nat_host1 is defined %}
+static ({{item.perimeter}},outside) {{item.pub_ip1}} {{item.nat_host1}} netmask 255.255.255.255
+!
+{% endif %}
+{% if item.conf_type == "Add" and item.perimeter is defined and item.nat_host2 is defined %}
+static ({{item.perimeter}},outside) {{item.pub_ip2}} {{item.nat_host2}} netmask 255.255.255.255
+!
+{% endif %}
+{% if item.conf_type == "Add" %}
+object-group network {{item.object_group_network}}
+{% for object_group_hosts in object_hosts %}
+{{object_group_hosts}}
+{% endfor %}
+!
+object-group service {{item.object_group_service}} {{item.service}}
+{% for object_group_services in object_services %}
+{{object_group_services}}
+{% endfor %}
+!
+access-list {{item.acl_name}} extended {{item.acl_action}} {{item.service}} {{item.source}} object-group {{item.object_group_network}} object-group {{item.object_group_service}}
+access-group {{item.acl_name}} in interface outside
+!
+{% endif %}
+{% if item.conf_type == "Edit" and item.perimeter is defined and item.nat_host0 is defined %}
+static ({{item.perimeter}},outside) {{item.pub_ip0}} {{item.nat_host0}} netmask 255.255.255.255
+!
+{% endif %}
+{% if item.conf_type == "Edit" and item.perimeter is defined and item.nat_host1 is defined %}
+static ({{item.perimeter}},outside) {{item.pub_ip1}} {{item.nat_host1}} netmask 255.255.255.255
+!
+{% endif %}
+{% if item.conf_type == "Edit" and item.perimeter is defined and item.nat_host2 is defined %}
+static ({{item.perimeter}},outside) {{item.pub_ip2}} {{item.nat_host2}} netmask 255.255.255.255
+!
+{% endif %}
+{% if item.conf_type == "Edit" %}
+object-group network {{item.object_group_network}}
+{% for object_group_hosts in object_hosts %}
+{{object_group_hosts}}
+{% endfor %}
+!
+{% endif %}
+{% if item.conf_type == "Clear" %}
+object-group network {{item.object_group_network}}
+{% for object_group_hosts in object_hosts %}
+no {{object_group_hosts}}
+{% endfor %}
+!
+{% endif %}
+{% if item.conf_type == "Clear" and item.perimeter is defined and item.nat_host0 is defined %}
+no static ({{item.perimeter}},outside) {{item.pub_ip0}} {{item.nat_host0}} netmask 255.255.255.255
+!
+{% if item.conf_type == "Clear" and item.perimeter is defined and item.nat_host1 is defined %}
+no static ({{item.perimeter}},outside) {{item.pub_ip1}} {{item.nat_host1}} netmask 255.255.255.255
+{% endif %}

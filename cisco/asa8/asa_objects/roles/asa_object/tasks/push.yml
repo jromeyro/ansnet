@@ -1,0 +1,5 @@
+---
+- name: Push Configuration to Network Device
+  command:   /usr/local/share/ansible/cisco/scripts/asa_config_file.py {{item.asa_hostname}}  output/firewalls/{{item.asa_hostname}}-asa_object-{{item.conf_type}}-{{ansible_date_time.iso8601}}.txt
+  delegate_to: orl-nt-tools-1
+  with_items: "{{asa_object_conf}}"

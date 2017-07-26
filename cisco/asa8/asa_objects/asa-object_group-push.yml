@@ -1,0 +1,10 @@
+---
+- name: Push switch configuration files
+  hosts: localhost
+  connection: local
+
+  roles:
+    - asa_object
+
+  tasks:
+    - include: roles/asa_object/tasks/push.yml

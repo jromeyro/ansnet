@@ -1,0 +1,6 @@
+---
+- name: Generate switch configuration files
+  hosts: localhost
+
+  roles:
+    - asa_object

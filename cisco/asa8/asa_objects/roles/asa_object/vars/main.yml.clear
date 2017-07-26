@@ -1,0 +1,21 @@
+asa_object_conf:
+ - {
+asa_hostname: asa-1,
+#Can be: Add, Edit, Clear
+conf_type: Edit,
+#objects
+object_group_network: web_servers,
+object_group_service: web_servers_ports,
+#NAT Options
+pub_ip0: 11.0.0.1,
+nat_host0: 10.0.0.1,
+pub_ip1: 11.0.0.2,
+nat_host1: 10.0.0.2,
+perimeter: dmz,
+}
+object_hosts:
+ - network-object host {{item.pub_ip0}}
+ - network-object host {{item.pub_ip1}}
+object_services:
+ - port-object eq http
+ - port-object eq https

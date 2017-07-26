@@ -1,0 +1,28 @@
+asa_object_conf:
+ - {
+asa_hostname: otc-fwa-01,
+#Can be: Add, Edit, Clear
+conf_type: Add,
+#objects
+object_group_network: web_servers,
+object_group_service: web_servers_ports,
+#udp, tcp
+service: tcp,
+#permit, deny
+acl_action: permit,
+# Allowed source
+source: any,
+#NAT Options
+pub_ip0: 11.0.0.1,
+nat_host0: 10.0.0.1,
+pub_ip1: 11.0.0.2,
+nat_host1: 10.0.0.2,
+perimeter: dmz,
+acl_name: outside_access_in,
+}
+object_hosts:
+ - network-object host {{item.pub_ip0}}
+ - network-object host {{item.pub_ip1}}
+object_services:
+ - port-object eq http
+ - port-object eq https
