@@ -41,10 +41,18 @@ peer_keepalive_remote_ip: 10.0.0.2,
 }
 #VLANs to be added if neeeded
 switch_vlans:
- - vlan 145
- - name "A DATA VLAN"
- - vlan 146
- - name "A VOICE VLAN"
+ - vlan 1
+ - name "1 VLAN"
+ - vlan 2
+ - name "2 VLAN"
+ - vlan 3
+ - name "3 VLAN"
+ - vlan 4
+ - name "4 VLAN"
+ - vlan 100
+ - name "100 VLAN"
+ - vlan 200
+ - name "200 VLAN"
 #
 #Peer vPC Port Channel Interfaces
 vpc_port_channel_interfaces:
