@@ -19,6 +19,8 @@ Example Role Splits:
       - nxos
         - nexus_vpc_peers
         - nexus_downstream_vpcs
+      - asa8
+        - asa_objects
  - juniper
    - roles
      - junos
@@ -41,7 +43,7 @@ Example Role Splits:
        - main.yml_builder_per_user_input
         - build_called_by_html
         - push_called_by_html
-    
+
 For enhanced user experience a web browser interface is part of the system.
 
 The root of all the roles listed was the "Freeform" role, due to its ability to push to any device as long as it is supported by Netmiko or NAPALM.
@@ -54,4 +56,3 @@ From FreeBSD Playbook
 - hosts: freebsd << Calls freebsd group in the hosts file. Normally located in /usr/local/ets/ansible/hosts
 
 The playbook can be ran on demand via command (ansible-playbook -vvv /usr/local/share/ansible/freebsd) a shell script or scheduled CRON.
-
