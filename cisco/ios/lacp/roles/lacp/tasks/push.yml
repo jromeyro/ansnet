@@ -1,0 +1,5 @@
+---
+- name: Push Configuration to Network Device
+  command: /usr/local/share/ansible/cisco/scripts/ios_config_file.py {{item.vendor}} {{item.hostname}} ansible_usr ansible_pwd output/switches/lacp/{{item.hostname}}-{{ansible_date_time.iso8601}}.txt
+  delegate_to: localhost
+  with_items: "{{ lacp }}"

@@ -1,0 +1,17 @@
+
+lacp:
+ - {
+host1: test-sw-1,
+host2: test-sw-2,
+pc_change_type: install,
+portchannel_type: trunk_pc,
+trunk_port_channel: 10,
+#
+pc_channel_member_1: e1/1,
+peer_port_description_1: e1/1,
+#
+pc_channel_member_2: e1/2,
+peer_port_description_2: e1/2,
+#
+trunk_allowed_vlans: '1-2,10-100',
+}

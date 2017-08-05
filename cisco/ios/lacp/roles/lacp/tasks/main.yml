@@ -1,0 +1,6 @@
+---
+- name: Generate configuration files
+  template:
+     src=lacp.j2
+     dest=/usr/local/share/ansible/lacp/output/lacp/lacp_trunk-{{item.host1}}-{{item.host2}}-{{ansible_date_time.iso8601}}.txt
+  with_items: "{{lacp}}"

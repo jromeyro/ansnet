@@ -1,0 +1,138 @@
+#LACP Port Channel Configuration created by Ansible for {{item.host1}} and {{item.host2}} on {{ansible_date_time.iso8601}}
+
+{% if item.portchannel_type == "trunk_pc" and item.pc_change_type == "update" and item.trunk_allowed_vlans_add is defined %}
+# --{{item.host1}}-- Port-channel {{item.trunk_port_channel}} Configuration
+!
+# ADDING VLANs TO PORT CHANNEL {{item.trunk_port_channel}} GROUP #
+!
+interface Port-channel{{item.trunk_port_channel}}
+switchport trunk allowed vlan add {{item.trunk_allowed_vlans_add}}
+!
+# --{{item.host2}}-- Port-channel {{item.trunk_port_channel}} Configuration
+!
+# ADDING VLANs TO PORT CHANNEL {{item.trunk_port_channel}} GROUP #
+!
+interface Port-channel{{item.trunk_port_channel}}
+switchport trunk allowed vlan add {{item.trunk_allowed_vlans_add}}
+!
+{% endif %}
+{% if item.portchannel_type == "trunk_pc" and item.pc_change_type == "install" %}
+# --{{item.host1}}-- Port-channel {{item.trunk_port_channel}} Configuration
+# clear interfaces #
+default interface {{item.pc_channel_member_1}}
+default interface {{item.pc_channel_member_2}}
+!
+# PORT CHANNEL {{item.trunk_port_channel}} MEMBERS #
+!
+interface {{item.pc_channel_member_1}}
+description {{item.host2}}:{{item.peer_port_description_1}}:PC_{{item.trunk_port_channel}}
+no switchport 
+switchport 
+switchport trunk encapsulation dot1q
+switchport trunk allowed vlan {{item.trunk_allowed_vlans}}
+switchport mode trunk
+channel-group {{item.trunk_port_channel}} mode active
+no shutdown
+!
+interface {{item.pc_channel_member_2}}
+description {{item.host2}}:{{item.peer_port_description_2}}:PC_{{item.trunk_port_channel}}
+no switchport 
+switchport 
+switchport trunk encapsulation dot1q
+switchport trunk allowed vlan {{item.trunk_allowed_vlans}}
+switchport mode trunk
+channel-group {{item.trunk_port_channel}} mode active
+no shutdown
+!
+# PORT CHANNEL {{item.trunk_port_channel}} INTERFACE #
+!
+interface Port-channel{{item.trunk_port_channel}}
+description {{item.host2}}:{{item.peer_port_description_1}}-{{item.peer_port_description_2}}
+switchport trunk encapsulation dot1q
+switchport trunk allowed vlan {{item.trunk_allowed_vlans}}
+switchport mode trunk
+!
+#
+# --{{item.host2}}-- Port-channel {{item.trunk_port_channel}} Configuration
+# clear interfaces #
+default interface {{item.peer_port_description_1}}
+default interface {{item.peer_port_description_2}}
+!
+# PORT CHANNEL {{item.trunk_port_channel}} MEMBERS #
+!
+interface {{item.peer_port_description_1}}
+description {{item.host1}}:{{item.pc_channel_member_1}}:PC_{{item.trunk_port_channel}}
+no switchport 
+switchport 
+switchport trunk encapsulation dot1q
+switchport trunk allowed vlan {{item.trunk_allowed_vlans}}
+switchport mode trunk
+channel-group {{item.trunk_port_channel}} mode active
+no shutdown
+!
+interface {{item.peer_port_description_2}}
+description {{item.host1}}:{{item.pc_channel_member_2}}:PC_{{item.trunk_port_channel}}
+no switchport 
+switchport 
+switchport trunk encapsulation dot1q
+switchport trunk allowed vlan {{item.trunk_allowed_vlans}}
+switchport mode trunk
+channel-group {{item.trunk_port_channel}} mode active
+no shutdown
+!
+# PORT CHANNEL {{item.trunk_port_channel}} INTERFACE #
+!
+interface Port-channel {{item.trunk_port_channel}}
+description {{item.host1}}:{{item.pc_channel_member_1}}-{{item.pc_channel_member_2}}
+switchport trunk encapsulation dot1q
+switchport trunk allowed vlan {{item.trunk_allowed_vlans}}
+switchport mode trunk
+!
+{% endif %}
+{% if item.portchannel_type == "trunk_pc" and item.pc_change_type == "decomm" %}
+# --{{item.host1}}-- Port-channel {{item.trunk_port_channel}} Backout
+# Port Channel Interface Shutdown
+!
+interface Port-channel{{item.trunk_port_channel}}
+shutdown
+!
+# Port Channel Member Interface(s) Shutdown
+!
+interface {{item.pc_channel_member_1}}
+shutdown
+!
+interface {{item.pc_channel_member_2}}
+shutdown
+!
+# clear interfaces #
+default interface {{item.pc_channel_member_1}}
+default interface {{item.pc_channel_member_2}}
+!
+# Clear Port Channel Interface
+!
+no interface Port-channel{{item.trunk_port_channel}}
+!
+#
+# --{{item.host2}}-- Port-channel {{item.trunk_port_channel}} Backout
+# Port Channel Interface Shutdown
+!
+interface Port-channel {{item.trunk_port_channel}}
+shutdown
+!
+# Port Channel Member Interface(s) Shutdown
+!
+interface {{item.peer_port_description_1}}
+shutdown
+!
+interface {{item.peer_port_description_2}}
+shutdown
+!
+# clear interfaces #
+default interface {{item.peer_port_description_1}}
+default interface {{item.peer_port_description_2}}
+!
+# Clear Port Channel Interface
+!
+no interface Port-channel{{item.trunk_port_channel}}
+!
+{% endif %}

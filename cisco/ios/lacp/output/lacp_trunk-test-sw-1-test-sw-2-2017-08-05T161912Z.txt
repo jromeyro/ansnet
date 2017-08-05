@@ -1,0 +1,73 @@
+#LACP Port Channel Configuration created by Ansible for test-sw-1 and test-sw-2 on 2017-08-05T16:19:12Z
+
+# --test-sw-1-- Port-channel 10 Configuration
+# clear interfaces #
+default interface e1/1
+default interface e1/2
+!
+# PORT CHANNEL 10 MEMBERS #
+!
+interface e1/1
+description test-sw-2:e1/1:PC_10
+no switchport 
+switchport 
+switchport trunk encapsulation dot1q
+switchport trunk allowed vlan 1-2,10-100
+switchport mode trunk
+channel-group 10 mode active
+no shutdown
+!
+interface e1/2
+description test-sw-2:e1/2:PC_10
+no switchport 
+switchport 
+switchport trunk encapsulation dot1q
+switchport trunk allowed vlan 1-2,10-100
+switchport mode trunk
+channel-group 10 mode active
+no shutdown
+!
+# PORT CHANNEL 10 INTERFACE #
+!
+interface Port-channel10
+description test-sw-2:e1/1-e1/2
+switchport trunk encapsulation dot1q
+switchport trunk allowed vlan 1-2,10-100
+switchport mode trunk
+!
+#
+# --test-sw-2-- Port-channel 10 Configuration
+# clear interfaces #
+default interface e1/1
+default interface e1/2
+!
+# PORT CHANNEL 10 MEMBERS #
+!
+interface e1/1
+description test-sw-1:e1/1:PC_10
+no switchport 
+switchport 
+switchport trunk encapsulation dot1q
+switchport trunk allowed vlan 1-2,10-100
+switchport mode trunk
+channel-group 10 mode active
+no shutdown
+!
+interface e1/2
+description test-sw-1:e1/2:PC_10
+no switchport 
+switchport 
+switchport trunk encapsulation dot1q
+switchport trunk allowed vlan 1-2,10-100
+switchport mode trunk
+channel-group 10 mode active
+no shutdown
+!
+# PORT CHANNEL 10 INTERFACE #
+!
+interface Port-channel 10
+description test-sw-1:e1/1-e1/2
+switchport trunk encapsulation dot1q
+switchport trunk allowed vlan 1-2,10-100
+switchport mode trunk
+!
