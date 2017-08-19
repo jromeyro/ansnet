@@ -31,6 +31,7 @@ Confirm New Vault password: your_secret_password
 ```
 
 > Running the Playbook with encrypted `secrets.yml`
+
 Password Prompted:
 ```
 ansible-playbook sco-cli-push.yml --ask-vault-pass -i hosts
