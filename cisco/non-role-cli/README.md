@@ -34,15 +34,16 @@ Confirm New Vault password: your_secret_password
 
 Password Prompted:
 ```
-ansible-playbook sco-cli-push.yml --ask-vault-pass -i hosts
+ansible-playbook cisco-cli-push.yml --ask-vault-pass -i hosts
 ```
 
 No password prompt:
 Create a file containing the vault password (vault_pass.py or anything else) and lock down permissions
 `chmod 600 vault_pass.py`
+
 Running Playbook:
 ```
-ansible-playbook site.yml --vault-password-file vault_pass.py - i hosts
+ansible-playbook cisco-cli-push.yml --vault-password-file vault_pass.py - i hosts
 ```
 
 Editing Encrypted files in vault
