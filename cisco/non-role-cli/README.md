@@ -10,7 +10,7 @@ With debug:
 ansible-playbook -vvv cisco-cli-push.yml -i hosts
 ```
 
-> Options in Playbooks
+> Options in Playbook Tasks
 ```yml
 - name: IOS Configuration #1
   ios_config:
