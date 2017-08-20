@@ -29,9 +29,35 @@ ansible-playbook cisco-cli-push.yml -i hosts
 ansible-playbook -vvv cisco-cli-push.yml -i hosts
 ```
 
-## Options in Playbook Tasks
+## Options in Playbook and Tasks
+> Playbook
+The playbook can be used to affect a group in the hosts file or a particular host within a group
+Group = ios
+```
+[ios]
+ios-swt-1
+ios-rtr-1
+```
 ```yml
-- name: IOS Configuration #1
+---
+- hosts: ios
+  gather_facts: no
+  connection: local
+```
+
+The playbook will run the task on `ios-swt-1` and `ios-rtr-1`
+
+For a particular host in this case `ios-swt-1`:
+```yml
+---
+- hosts: ios-swt-1
+  gather_facts: no
+  connection: local
+```
+
+> Task Options:
+```yml
+- name: An IOS Configuration Task
   ios_config:
     provider: "{{ provider }}"
     lines:
@@ -43,7 +69,7 @@ ansible-playbook -vvv cisco-cli-push.yml -i hosts
 ```
 
 > Ecrypting the `secrets.yml` file
-```
+```yml
 $ansible-vault encrypt secrets.yml
 New Vault password: your_secret_password
 Confirm New Vault password: your_secret_password
