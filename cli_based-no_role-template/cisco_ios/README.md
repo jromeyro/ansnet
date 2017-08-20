@@ -1,5 +1,23 @@
 # Non Role Based Playbook
 Template for non role based ios, on demmand configuration. Uses Ansible modules.
+> Folder Structure:
+```
+cli_based-no_role-template/
+└── cisco_ios
+    ├── backup
+    │   └── README.md
+    ├── cisco-cli-push.yml
+    ├── config_partial
+    │   └── raw_banner.cfg
+    ├── hosts
+    ├── README.md
+    ├── secrets.yml
+    └── tasks
+        ├── banner_motd.yml
+        ├── configure-interface.yml
+        ├── runn-backup-save-to-start.yml
+        └── set-dns.yml
+```
 
 > Usage:
 ```
