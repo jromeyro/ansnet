@@ -62,9 +62,9 @@ For a particular host in this case `ios-swt-1`:
     provider: "{{ provider }}"
     lines:
       - [configuration line]
-    # Makes a backup of the running configuration to the playbook's folder (backup/)
+    # "backup: [yes | no] " Makes a backup of the running configuration to the playbook's folder (backup/)
     backup: yes
-    # Saves running Configuration
+    # "save: [yes | no]" Saves running Configuration
     save: yes 
 ```
 
@@ -78,7 +78,7 @@ Confirm New Vault password: your_secret_password
 > Running the Playbook with encrypted `secrets.yml`
 
 Password Prompted:
-```
+```sh
 ansible-playbook cisco-cli-push.yml --ask-vault-pass -i hosts
 ```
 
@@ -87,16 +87,16 @@ Create a file containing the vault password (vault_pass.py or anything else) and
 `chmod 600 vault_pass.py`
 
 Running Playbook:
-```
+```sh
 ansible-playbook cisco-cli-push.yml --vault-password-file vault_pass.py - i hosts
 ```
 
 Editing Encrypted files in vault
-```
+```sh
 $ansible-vault edit secrets.yml
 Vault password: your_secret_password
 ```
 Or
-```
+```sh
 $ansible-vault edit secrets.yml --vault-password-file vault_pass.py
 ```
