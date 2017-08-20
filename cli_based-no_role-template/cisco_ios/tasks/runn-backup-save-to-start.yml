@@ -1,6 +1,0 @@
----
-- name: Backup and Save Running Configuration to Startup if Changed
-  ios_config:
-    backup: yes
-    save: yes
-    provider: "{{ provider }}"
